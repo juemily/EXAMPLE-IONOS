@@ -1,0 +1,57 @@
+# To better understand this file read this:
+# https://docs.ionos.space/docs/github-actions-customization/
+
+name: "Deploy Now: Execute Build"
+
+on:
+  workflow_call:
+    inputs:
+      site-url:
+        required: true
+        type: string
+      branch-id:
+        required: true
+        type: string
+
+env:
+  DEPLOYMENT_FOLDER: out
+
+jobs:
+# Please do not rename this job
+  build-project:
+    name: build EXAMPLE-IONOS
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: v16.x
+
+      - name: Build Node assets
+        env:
+          CI: true
+          NEXT_PUBLIC_SANITY_TOKEN: skOVSiF7KWVN9Ln2xs49RgE7MEa6cZqPDqMgLSxTOBqzkPcuH93hmlpqFp9IQ2JAgZvfsiejIt8lHw2078sTA3pxTYuRqgfRHltYUHUa6oSnSScgvi9dKPdVqgV7mQOvKRh4oCX8YvAxnFjrOlcxxJ1chu0xrEBtuH9VY04bRn9Cw86OIdct
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_51LnDPeLN9mFEw2Wi3X46TJVzJgJ356HNqjHyHcyTSLKOYWnvkWjVBt9HBvMI0ozDM57TVTa2nIFK3wxmnNm30fL500AKLXuGm6
+          NEXT_PUBLIC_STRIPE_SECRET_KEY: sk_test_51LnDPeLN9mFEw2WiI5rEGMH7uG5eqWif8DzhKeEOlpgttZ0zuLWiTR8DQ3YiBWQUROm8PrJAnZmFtPEeSR0LpdwP00R1Sqa9nB
+          SITE_URL: ${{ inputs.site-url }}
+        run: |
+          npm install
+          npm run build
+
+# Please do not touch the following action
+      - name: Store deployment content
+        uses: ionos-deploy-now/artifact-action@v1
+        with:
+          api-key: ${{ secrets.IONOS_API_KEY }}
+          service-host: api-eu.ionos.space
+          project-id: 634ab41f-c5cc-4eff-b754-9356a476c7a2
+          branch-id: ${{ inputs.branch-id }}
+          version: ${{ github.sha }}
+          folder: ${{ env.DEPLOYMENT_FOLDER }}
+          config-file: .deploy-now/EXAMPLE-IONOS/config.yaml
+          action: upload
