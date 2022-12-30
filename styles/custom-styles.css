@@ -1,0 +1,152 @@
+header {
+    padding: 10px;
+    box-shadow: 1px 8px 16px 8px #0000000a;
+    position: fixed;
+    background-color: white;
+    z-index: 100;
+    width: 100%;
+    height: 64px;
+    border-bottom: 1px solid #d7d7d7;
+}
+footer {
+    background-color: #fafafa;
+    border-top: 1px solid #dddddd;
+}
+.app__content {
+    padding-top: 65px;
+    padding-bottom: 60px;
+}
+.container {
+    max-width: 1340px;
+    margin: auto;
+}
+.modal__header {
+    font-size: 24px;
+    text-align: center;
+    font-weight: 600;
+}
+.modal-header {
+    position: relative;
+}
+.modal-header button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+}
+.modal-header svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 22px;
+    color: red;
+}
+.modal__form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding: 40px 0;
+    max-width: 800px;
+    margin: auto;
+}
+.modal__form-input {
+    margin-bottom: 20px;
+}
+.modal__form-input label {
+    font-weight: 500;
+    display: block;
+}
+.modal__form-input input, .modal__form-input textarea {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 10px;
+    border: 1px solid #cbcaca;
+    border-radius: 2px;
+    padding: 8px 10px;
+    resize: none;
+}
+.modal_product-list-title {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 12px;
+}
+.normal-button {
+    border-radius: 4px;
+    border: 1px solid #f02d34;
+    background-color: white;
+    color: #f02d34;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    max-height: 46px;
+}
+.focus-button {
+    border-radius: 4px;
+    border: 1px solid #f02d34;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    max-height: 46px;
+}
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.cart__footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.cart__footer {
+    padding: 20px;
+    border-top: 1px solid #c5c4c4;
+}
+.cart-items__container {
+    height: 100%;
+    padding-bottom: 182px;
+    overflow-y: auto;
+}
+div#modalsuccess {
+    text-align: center;
+    padding-top: 20px;
+}
+.map-img__link {
+    display: block;
+    margin: 20px auto;
+    background-size: 100% 100%;
+    background-image: url("./assets/4.png");
+    width: 600px;
+    height: 400px;
+}
+@media screen and (max-width:800px) {
+    .modal__form {
+        display: block;
+        padding: 12px 0;
+        max-width: 800px;
+        margin: auto;
+    }
+    .modal-footer button {
+        font-size: 16px;
+        padding: 8px;
+        margin-top: 10px;
+    }
+    .modal__form-products ul {
+        padding-left: 20px;
+        font-size: 14px;
+    }
+    .modal-footer {
+        display: block;
+    }
+    .modal__form-input {
+        margin-bottom: 10px;
+    }
+    .map-img__link {
+        width: 300px;
+        height: 200px;
+    }
+}
