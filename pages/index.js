@@ -4,10 +4,30 @@ import { Product, HeroBanner } from '../components';
 
 import {client} from '../lib/client'
 
-const Home = ({products, bannerData}) => (
+const products = async() =>{
+  const query = '*[_type == "product"]';
+  const temporalProd =await client.fetch(query)
+    return temporalProd; 
+};
+
+const bannerData = async() =>{
+  const bannerQuery = '*[_type == "banner"]';
+  const temporalBar =await client.fetch(bannerQuery)
+  return temporalBar};
+
+ 
+
+const Home = () => (
+
+
+
+   
+  
+    
   
     <div>
-      { /*<HeroBanner heroBanner={bannerData.length && bannerData[0]} />*/}
+    {console.log(bannerData())} 
+      
      
     
       
@@ -31,7 +51,7 @@ const Home = ({products, bannerData}) => (
       </div>
 
       <div className='products-container'>
-          {products?.map((product)=> <Product key = {product._id} product={product}/>)}
+          {console.log(products())}
       </div>  
 
      {/**  <FooterBanner footerBanner={ bannerData[0]}/> */}
@@ -42,16 +62,16 @@ const Home = ({products, bannerData}) => (
 
   
 
-/*export const getServerSideProps = async()=> {
-  const query = '*[_type == "product"]';
-  const products = await client.fetch(query);
-
-  const bannerQuery = '*[_type == "banner"]';
-  const bannerData = await client.fetch(bannerQuery)
-
-  return {
-    props: {products, bannerData}
-  }
-}*/
+  /*export const getServerSideProps = async()=> {
+    const query = '*[_type == "product"]';
+    const products = await client.fetch(query);
+  
+    const bannerQuery = '*[_type == "banner"]';
+    const bannerData = await client.fetch(bannerQuery)
+  
+    return {
+      props: {products, bannerData}
+    }
+  }*/
 
 export default Home
