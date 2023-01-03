@@ -1,43 +1,13 @@
-
+import Link from 'next/link';
 import React from 'react'
-import { Product, HeroBanner } from '../components';
+import { Product, FooterBanner, HeroBanner } from '../components';
 
 import {client} from '../lib/client'
 
-let products = {};
-
-const productsRequest = async() =>{
-  const query = '*[_type == "product"]';
-  const temporalProd =await client.fetch(query)
-  products = temporalProd;
-  console.log("ajaaaaaaa ----->"+temporalProd)
-
-    return temporalProd 
-};
-
-const bannerData = async() =>{
-
-  const bannerQuery = '*[_type == "banner"]';
-  const temporalBar =await client.fetch(bannerQuery)
-  return temporalBar};
-
-
-productsRequest();
- 
-
-const Home = () => (
-
-
-
-   
-  
-    
+const Home = ({products, bannerData}) => (
   
     <div>
-    {console.log(products)
-    } 
-    <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
-      
+      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
      
     
       
@@ -60,18 +30,30 @@ const Home = () => (
       
       </div>
 
+      {console.log(typeof(products))}
+
       <div className='products-container'>
           {products?.map((product)=> <Product key = {product._id} product={product}/>)}
-      </div>
+      </div>  
 
-     {/**  <FooterBanner footerBanner={ bannerData[0]}/>
-     
-       
-      */}
+     {/**  <FooterBanner footerBanner={ bannerData[0]}/> */}
 
     </div>
     
   );
 
+  
+
+export const getStaticProps = async()=> {
+  const query = '*[_type == "product"]';
+  const products = await client.fetch(query);
+
+  const bannerQuery = '*[_type == "banner"]';
+  const bannerData = await client.fetch(bannerQuery)
+
+  return {
+    props: {products, bannerData}
+  }
+}
 
 export default Home
